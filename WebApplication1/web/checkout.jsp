@@ -4,6 +4,7 @@
     Author     : AnhDuc
 --%>
 
+<%@page import="model.Cart"%>
 <%@page import="model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,25 +35,39 @@
             if (account == null){
                 response.sendRedirect("/WebApplication1/login.jsp");
             }
+            
         %>
         <jsp:include page="header.jsp"></jsp:include>
         
-        
-            <div class="login">
-                <div class="wrap">
-                    <div class="col_1_of_login span_1_of_login">
-                        <h4 class="title">New Account</h4>
-                        <p>Nếu bạn chưa có tài khoản hãy tạo một tài khoản mới để sử dụng dịch vụ của chúng tôi!</p>
-                        <div class="button1">
-                            <a href="register.jsp"><input type="submit" name="Submit" value="Create an Account"></a>
-                        </div>
-                        <div class="clear"></div>
+        <%
+            Cart cart = (Cart) session.getAttribute("cart");
+            if(cart.cartItem.size() == 0){
+        %>
+        <div class="register_account">
+		<div class="wrap">
+			<h4 class="title">Shopping cart is empty</h4>
+			<p class="cart">You have no items in your shopping cart.<br>Click <a href="index.jsp">here</a> to continue shopping.</p>
+		</div>
+	</div>
+        <%  }
+            else {
+        %>
+        <div class="login">
+            <div class="wrap">
+                <div class="col_1_of_login span_1_of_login">
+                    <h4 class="title">Tips</h4>
+                    <p>Bạn vui lòng điển đầy đủ thông địa chỉ giao hàng và phương thức thanh toán!</p>
+                    <p>Hoặc trờ lại trang chủ để xem thêm sản phẩm trước khi thanh toán!</p>
+                    <div class="button1">
+                        <a href="index.jsp"><input type="submit" name="Submit" value="Home"></a>
                     </div>
-                    <div class="col_1_of_login span_1_of_login">
-                        <div class="login-title">
-                            <h4 class="title">Mời bạn nhập thông tin thanh toán</h4>
-                            <div id="loginbox" class="loginbox">
-                                <form action="CheckOutServlet" method="post" name="login" id="login-form">
+                    <div class="clear"></div>
+                </div>
+                <div class="col_1_of_login span_1_of_login">
+                    <div class="login-title">
+                        <h4 class="title">Mời bạn nhập thông tin thanh toán</h4>
+                        <div id="loginbox" class="loginbox">
+                            <form action="CheckOutServlet" method="post" name="login" id="login-form">
                                 <fieldset class="input">
                                     <div>
                                         <span>Địa chỉ giao hàng</span>
@@ -67,9 +82,9 @@
                                             <option value="Live">Live</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="remember">
-                                        
+
                                         <button class="grey" type="hidden" value="checkout" name="command">Checkout</button>
 
                                         <div class="clear"></div>
@@ -82,6 +97,7 @@
                 <div class="clear"></div>
             </div>
         </div>
+        <%  }%>
         
         <jsp:include page="footer.jsp"></jsp:include>
         

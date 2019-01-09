@@ -11,8 +11,8 @@ package model;
  */
 public class BillDetail {
     
-    private long billDetailID;
-    private long billID;
+    private String billDetailID;
+    private String billID;
     private String bookID;
     private double price;
     private int quantity;
@@ -20,7 +20,7 @@ public class BillDetail {
     public BillDetail() {
     }
 
-    public BillDetail(long billDetailID, long billID, String bookID, double price, int quantity) {
+    public BillDetail(String billDetailID, String billID, String bookID, double price, int quantity) {
         this.billDetailID = billDetailID;
         this.billID = billID;
         this.bookID = bookID;
@@ -28,19 +28,19 @@ public class BillDetail {
         this.quantity = quantity;
     }
 
-    public long getBillDetailID() {
+    public String getBillDetailID() {
         return billDetailID;
     }
 
-    public void setBillDetailID(long billDetailID) {
+    public void setBillDetailID(String billDetailID) {
         this.billDetailID = billDetailID;
     }
 
-    public long getBillID() {
+    public String getBillID() {
         return billID;
     }
 
-    public void setBillID(long billID) {
+    public void setBillID(String billID) {
         this.billID = billID;
     }
 

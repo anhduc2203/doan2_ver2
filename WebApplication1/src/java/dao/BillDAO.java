@@ -25,7 +25,7 @@ public class BillDAO {
         String sql = "insert into BILL values(?,?,?,?,?,?)";
         PreparedStatement ps = conn.prepareCall(sql);
         
-        ps.setLong(1, bill.getBillID());
+        ps.setString(1, bill.getBillID());
         ps.setString(2, bill.getAccountID());
         ps.setDouble(3, bill.getTotal());
         ps.setString(4, bill.getPayment());
@@ -34,5 +34,11 @@ public class BillDAO {
         ps.executeUpdate();
     }
     
-    
+//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//
+//        Long ID = new Date(System.currentTimeMillis()).getTime();
+//        String s = Long.toString(ID);
+//        String trim = s.trim();
+//        new BillDAO().insertBill(new Bill(trim, "USER000001", 10, "live", "Ha Noi", new Timestamp(new Date(System.currentTimeMillis()).getTime())));
+//    }
 }

@@ -7,6 +7,7 @@ package controller;
 
 import dao.BillDAO;
 import dao.BillDetailDAO;
+import dao.BookDAO;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ import model.Bill;
 import model.BillDetail;
 import model.Cart;
 import model.Item;
+import tools.SendEmail;
 
 /**
  *
@@ -50,29 +52,37 @@ public class CheckOutServlet extends HttpServlet {
         Account account = (Account) session.getAttribute("acc");
         
         try {
+            Long ID = new Date(System.currentTimeMillis()).getTime();
+            String s = Long.toString(ID);
+            String billCode = s.trim();
             
-            Long ID = new Date(0).getTime();
             Bill bill = new Bill();
-            bill.setBillID(ID);
+            bill.setBillID(billCode);
             bill.setAddress(address);
             bill.setPayment(payment);
             bill.setTotal(cart.totalCart());
             bill.setAccountID(account.getUserCode());
-            bill.setDate(new Timestamp(new Date(0).getTime()));
+            bill.setDate(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
             billDAO.insertBill(bill);
+            
+            String msg = "Order Code: " + billCode + "\nPayment: " + payment + "\nTotal: " + cart.totalCart() + "\nOrder:";
+            BookDAO bookDAO = new BookDAO();
             for (Map.Entry<String, Item> list: cart.getCartItem().entrySet()){
-                billDetailDAO.insertBillDetail(new BillDetail(0, ID,
+                msg = msg + "\n\t+ " + bookDAO.getBookByBookID(list.getValue().getBook().getBookCode()).getBookName() + " x " + list.getValue().getQuantity();
+                billDetailDAO.insertBillDetail(new BillDetail("", billCode,
                         list.getValue().getBook().getBookCode(),
                         list.getValue().getBook().getBookPrice(),
                         list.getValue().getQuantity()));
             }  
+            
+            new SendEmail().sendMail(account.getUserEmail(), "LEO SHOP - Project 2", msg);
             
             cart = new Cart();
             session.setAttribute("cart", cart);
                     
         } catch (ClassNotFoundException | SQLException e) {
         }
-        
+        response.sendRedirect("/WebApplication1/thongbao.jsp");
     }
 
     

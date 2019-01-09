@@ -60,7 +60,17 @@
 
                         <!--</div>
                         <div class="col_1_of_2 span_1_of_2">-->
+                        <%if (session.getAttribute("erroremail") != null) {%>
+                        <div>
+                            <p style="color: red">*Email không hợp lệ!</p>
+                        </div>
+                        <%}%>
                         <div><input type="text" name="email" id="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}"></div>
+                        <%if (session.getAttribute("errorphone") != null) {%>
+                        <div>
+                            <p style="color: red">*Số điện thoại không hợp lệ!</p>
+                        </div>
+                        <%}%>
                         <div><input type="text" name="phonenumber" id="phonenumber" value="Phone Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Phone Number';}"></div>
                         <div><input type="text" name="address" id="address" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>
                         <div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">

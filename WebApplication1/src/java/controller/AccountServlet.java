@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
+import tools.CheckPhoneNumberEmailError;
 
 /**
  *
@@ -43,32 +44,48 @@ public class AccountServlet extends HttpServlet {
         Account acc = new Account();
         AccountDAO accDAO = new AccountDAO();
         
+        CheckPhoneNumberEmailError checkPhoneEmail = new CheckPhoneNumberEmailError();
+        
         HttpSession session = request.getSession();
         switch (command) {
             case "register":
-                url = "/index.jsp";
-                              
-                acc.setUserCode("");
-                acc.setUserName(request.getParameter("username"));
-                acc.setUserPass(request.getParameter("password"));
-                acc.setUserRole("KH");
-                acc.setFullName(request.getParameter("name"));
-                acc.setCityOrSchool(request.getParameter("ctyorschool"));
-                acc.setUserEmail(request.getParameter("email"));
-                acc.setPhoneNumber(request.getParameter("phonenumber"));
-                acc.setUserAddres(request.getParameter("address"));
-                acc.setUserCountry(request.getParameter("country"));
-                try {
-                    accDAO.insertAccount(acc);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                String diaChi = acc.getFullName();
-                
-                session.setAttribute("acc", acc);
+                if(checkPhoneEmail.checkNumberPhone(request.getParameter("phonenumber")) && checkPhoneEmail.checkEmail(request.getParameter("email"))){
+                    url = "/index.jsp";
+                    acc.setUserCode("");
+                    acc.setUserName(request.getParameter("username"));
+                    acc.setUserPass(request.getParameter("password"));
+                    acc.setUserRole("KH");
+                    acc.setFullName(request.getParameter("name"));
+                    acc.setCityOrSchool(request.getParameter("ctyorschool"));
+                    acc.setUserEmail(request.getParameter("email"));
+                    acc.setPhoneNumber(request.getParameter("phonenumber"));
+                    acc.setUserAddres(request.getParameter("address"));
+                    acc.setUserCountry(request.getParameter("country"));
+                    try {
+                        accDAO.insertAccount(acc);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    String diaChi = acc.getFullName();
 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
-                rd.forward(request, response);
+                    session.setAttribute("acc", acc);
+
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+                    rd.forward(request, response);
+                    
+                }else{
+                    if(!checkPhoneEmail.checkNumberPhone(request.getParameter("phonenumber"))){
+                        session.setAttribute("errorphone", "incorrect");
+                    }
+                    if(!checkPhoneEmail.checkEmail(request.getParameter("email"))){
+                        session.setAttribute("erroremail", "incorrect");
+                    }
+                    url = "/register.jsp";
+                    RequestDispatcher rd1 = getServletContext().getRequestDispatcher(url);
+                    rd1.forward(request, response);
+                    System.out.println("Dang ky that bai");
+                }
+                
                 break;
             case "login":
                 String user = request.getParameter("username");

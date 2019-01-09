@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  */
 public class Bill {
     
-    private long billID;
+    private String billID;
     private String accountID;
     private double total;
     private String payment;
@@ -23,7 +23,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(long billID, String accountID, double total, String payment, String address, Timestamp date) {
+    public Bill(String billID, String accountID, double total, String payment, String address, Timestamp date) {
         this.billID = billID;
         this.accountID = accountID;
         this.total = total;
@@ -32,11 +32,11 @@ public class Bill {
         this.date = date;
     }
 
-    public long getBillID() {
+    public String getBillID() {
         return billID;
     }
 
-    public void setBillID(long billID) {
+    public void setBillID(String billID) {
         this.billID = billID;
     }
 
