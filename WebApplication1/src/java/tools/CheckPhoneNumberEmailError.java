@@ -20,7 +20,7 @@ public class CheckPhoneNumberEmailError {
             return false;
         } else if (number.length() == 10 || number.length() == 11) {
             if (number.length() == 10) {
-                if (number.substring(0, 2).equals("09")) {
+                if (number.substring(0, 2).equals("09") || number.substring(0, 2).equals("08") || number.substring(0, 2).equals("03") || number.substring(0, 2).equals("07") || number.substring(0, 2).equals("05")) {
                     return true;
                 } else {
                     return false;

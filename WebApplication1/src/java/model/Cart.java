@@ -54,7 +54,7 @@ public class Cart {
                 cartItem.remove(key);
             } else{
                 item.setQuantity(quantity_old - 1);
-                //cartItem.put(key, item);
+                cartItem.put(key, item);
             }
         }
     }

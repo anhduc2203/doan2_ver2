@@ -62,9 +62,9 @@
                         <%
                             String s = categoryDAO.getCategory(Integer.parseInt(categoryID));
                         %>
-                        <h2 class="head"><%=s %></h2>
+                        <h2 class="head">Category: <%=s%></h2>
                         <div class="mens-toolbar">
-                            <div class="sort">
+<!--                            <div class="sort">
                                 <div class="sort-by">
                                     <label>Sort By</label>
                                     <select>
@@ -77,8 +77,13 @@
                                     </select>
                                     <a href=""><img src="images/arrow2.gif" alt="" class="v-middle"></a>
                                 </div>
-                            </div>
-                            <div class="pager">
+                            </div>-->
+<!--                            <div class="pager">
+                                <ul class="dc_pagination dc_paginationA dc_paginationA06">
+                                    <li><a href="#" class="previous">Pages</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                </ul>
                                 <div class="limiter visible-desktop">
                                     <label>Show</label>
                                     <select>
@@ -90,13 +95,8 @@
                                             30 </option>
                                     </select> per page
                                 </div>
-                                <ul class="dc_pagination dc_paginationA dc_paginationA06">
-                                    <li><a href="#" class="previous">Pages</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                </ul>
                                 <div class="clear"></div>
-                            </div>
+                            </div>-->
                             <div class="clear"></div>
                         </div>
                         
@@ -120,23 +120,29 @@
                             %>
                             
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
+                                
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
                                         </div>
+                                        </a>
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName() %></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice() %></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
+                                
                             </div>
                             <%
                                 }
@@ -148,7 +154,7 @@
                             }
                             }else{
                                 sohang = size/3 + 1;
-                                sodu = size/3;
+                                sodu = size%3;
                                     
                                 int k;
                                 for(k = 0; k < (sohang - 1); k++){
@@ -163,23 +169,29 @@
                             %>
                             
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
+                                
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
                                         </div>
+                                        </a>
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName() %></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice() %></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
+                                
                             </div>
                             <%
                                 }
@@ -190,8 +202,48 @@
                         
                         <%
                                 }
-                            }
                         %>
+                        <div class="top-box">
+                            <%
+                                //bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(index);
+                                for(int j = k*3; j < (k*3+sodu); j++){
+                                    Book b = bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(j);
+                                    if(b == null) break;
+                            %>
+                            
+                            <div class="col_1_of_3 span_1_of_3">
+                                
+                                    <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
+                                        <div class="product_image">
+                                            <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
+                                        </div>
+                                        </a>
+                                        <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
+                                            <div class="cart-left">
+                                                <p class="title"><%=b.getBookName() %></p>
+                                                <div class="price1">
+                                                    <span class="actual">$<%=b.getBookPrice() %></span>
+                                                </div>
+                                            </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">
+                                            <div class="cart-right"> </div>
+                                            </a>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            <%
+                                }
+                            %>                           
+                            <div class="clear"></div>
+                        </div>
+                        <% } %>
+                        
+                        
                         
                     </div>
                         

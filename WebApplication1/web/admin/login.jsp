@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Đăng nhập</title>
         
         <c:set var="root" value="${pageContext.request.contextPath}"/>
         <link href="${root}/css/mos-style.css" rel='stylesheet' type='text/css' />
@@ -24,15 +24,20 @@
 
         <div id="loginForm">
             <div class="headLoginForm">
-                Login Administrator
+                Đăng nhập với tư cách admin
             </div>
             <div class="fieldLogin">
-                <form method="POST" action="">
-                    <label>Username</label><br>
-                    <input type="text" class="login"><br>
-                    <label>Password</label><br>
-                    <input type="password" class="login"><br>
-                    <input type="submit" class="button" value="Login">
+                <form action="/WebApplication1/AccountServlet" method="post" name="loginAdmin">
+                        <%if (session.getAttribute("error") != null) {%>
+                        <div>
+                            <p style="color: red"><%=session.getAttribute("error")%></p>
+                        </div>
+                        <%}%>
+                        <label>Username</label><br>
+                        <input type="text" class="login" name="username" autocomplete="off"><br>
+                        <label>Password</label><br>
+                        <input type="password" class="login" name="password" autocomplete="off"><br>
+                        <button class="button" type="submit" value="loginAdmin" name="command">Login</button>
                 </form>
             </div>
         </div>

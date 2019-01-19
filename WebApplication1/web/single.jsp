@@ -120,7 +120,7 @@
                                 <div class="nbs-flexisel-inner">
                                     <ul id="flexiselDemo3" class="nbs-flexisel-ul" style="left: -187.4px; display: block;">
                                         <%
-                                            for(Book b2 : bookDAO.getListBookByCategory(b.getBookCategory())){
+                                            for(Book b2 : bookDAO.getListTenBookByCategory(b.getBookCategory())){
                                         %>
                                         <a href="single.jsp?bookID=<%=b2.getBookCode() %>">
                                             <li class="nbs-flexisel-item" style="width: 187.4px;"><img src="<%=b2.getBookImage()%>">
@@ -191,6 +191,12 @@
                             <h3 class="m_3">More Information</h3>
                             <p class="m_text"><%=b.getBookDescription() %>.</p>
                         </div>
+                        
+                        <div class="toogle">
+                            <h3 class="m_3">Comments-----------------</h3>
+                        </div>
+                        <!--Plugin FB Comment-->
+                        <div class="fb-comments" data-href="http://localhost:8084/WebApplication1/single.jsp?bookID=<%=bookID%>" data-width="900" data-numposts="5"></div>
                     </div>
                         
                         

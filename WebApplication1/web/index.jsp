@@ -30,7 +30,7 @@
 	<script src="js/jquery.easydropdown.js"></script>
     </head>
     <body>
-
+        
         <%
             BookDAO bookDAO = new BookDAO();
         %>
@@ -88,24 +88,28 @@
                                     if (count1 < 4) {
                             %>
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage()%>" alt="<%=b.getBookName()%>" />
                                         </div>
+                                        </a>
                                         <!--<div class="sale-box"><span class="on_sale title_shop">New</span></div> -->
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName()%></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice()%></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">     
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                             <%
                                     }
@@ -121,23 +125,27 @@
                                     if (count2 < 4) {
                             %>
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage()%>" alt="<%=b.getBookName()%>" />
                                         </div>
+                                        </a>
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName()%></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice()%></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">     
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                             <%
                                     }
@@ -153,24 +161,28 @@
                                     if ((count3 >= 4) && (count3 < 7)) {
                             %>
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage()%>" alt="<%=b.getBookName()%>" />
                                         </div>
+                                        </a>
                                         <!--<div class="sale-box"><span class="on_sale title_shop">New</span></div> -->
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName()%></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice()%></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">     
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                             <%
                                     }
@@ -189,24 +201,28 @@
                                     if ((count4 >= 6) && (count4 < 9)) {
                             %>
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage()%>" alt="<%=b.getBookName()%>" />
                                         </div>
+                                        </a>
                                         <div class="sale-box"><span class="on_sale title_shop">New</span></div>
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName()%></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice()%></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">     
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                             <%
                                     }
@@ -221,7 +237,7 @@
                             
                     <div class="rsidebar span_1_of_left">
                         <div class="top-border"> </div>
-                        <div class="border">
+<!--                        <div class="border">
                             <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
                             <link href="css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
                             <script src="js/jquery.nivo.slider.js"></script>
@@ -238,14 +254,19 @@
                                 </div>
                             </div>
                             <div class="btn"><a href="single.html">Check it Out</a></div>
-                        </div> 
+                        </div> -->
                         <div class="top-border"> </div>
                         <div class="sidebar-bottom">
-                            <h2 class="m_1">Newsletters<br> Signup</h2>
-                            <p class="m_text">Lorem ipsum dolor sit amet, consectetuer</p>
+                            <h2 class="m_1">Newsletters</h2>
+                            <p class="m_text">Nhập email để nhận được thông tin sách mới!</p>
                             <div class="subscribe">
-                                <form>
-                                    <input name="userName" type="text" class="textbox">
+                                <form action="NewsLettersServlet" method="POST">
+                                    <%if (session.getAttribute("nofication") != null) {%>
+                                    <div>
+                                        <p style="color: red"><%=session.getAttribute("nofication") %></p>
+                                    </div>
+                                    <%}%>
+                                    <input name="emailsignup" type="text" class="textbox">
                                     <input type="submit" value="Subscribe">
                                 </form>
                             </div>
@@ -257,4 +278,5 @@
 
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
+    
 </html>

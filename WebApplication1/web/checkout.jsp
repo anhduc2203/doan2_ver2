@@ -56,8 +56,8 @@
             <div class="wrap">
                 <div class="col_1_of_login span_1_of_login">
                     <h4 class="title">Tips</h4>
-                    <p>Bạn vui lòng điển đầy đủ thông địa chỉ giao hàng và phương thức thanh toán!</p>
-                    <p>Hoặc trờ lại trang chủ để xem thêm sản phẩm trước khi thanh toán!</p>
+                    <p>Please, enter your infomation!</p>
+                    
                     <div class="button1">
                         <a href="index.jsp"><input type="submit" name="Submit" value="Home"></a>
                     </div>
@@ -65,12 +65,17 @@
                 </div>
                 <div class="col_1_of_login span_1_of_login">
                     <div class="login-title">
-                        <h4 class="title">Mời bạn nhập thông tin thanh toán</h4>
+                        <h4 class="title">Enter your infomation</h4>
                         <div id="loginbox" class="loginbox">
                             <form action="CheckOutServlet" method="post" name="login" id="login-form">
                                 <fieldset class="input">
+                                    <%if (session.getAttribute("errorcheckout") != null) {%>
                                     <div>
-                                        <span>Địa chỉ giao hàng</span>
+                                        <p style="color: red">*Error not null!</p>
+                                    </div>
+                                    <%}%>
+                                    <div>
+                                        <span>Address</span>
                                         <input id="modlgn_username" type="text" name="address" class="inputbox" size="18" autocomplete="off">
                                     </div>
                                     <br>
@@ -85,7 +90,7 @@
 
                                     <div class="remember">
 
-                                        <button class="grey" type="hidden" value="checkout" name="command">Checkout</button>
+                                        <button class="grey" type="hidden" value="checkout" name="command">Check out</button>
 
                                         <div class="clear"></div>
                                     </div>

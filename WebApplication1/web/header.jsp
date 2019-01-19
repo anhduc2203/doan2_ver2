@@ -35,6 +35,16 @@
         <script src="js/fwslider.js"></script>
         <!--end slider -->
         <script src="js/jquery.easydropdown.js"></script>
+        
+        <!--Plugin Fb Comment-->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=723680054670657&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     </head>
     <body>
 
@@ -75,7 +85,7 @@
                             account = (Account) session.getAttribute("acc");
                         %>
                         <li class="active"><a href="#">Hello: <%=account.getUserName() %></a></li> |
-                        <!--<li><a href="checkout.html">Wishlist</a></li> | -->
+                        <li><a href="changepasswd.jsp">Change Password</a></li> |
                         <li><a href="checkout.jsp">Checkout</a></li> |
                         <li><a href="LogoutServlet">Logout -></a></li>
                         <%}else{%>
@@ -99,7 +109,7 @@
                     <div class="menu">
                         <ul class="megamenu skyblue">
                             <li class="active grid"><a href="index.jsp">Home</a></li>
-                            <li><a class="color4" href="#">English Book</a>
+                            <li><a class="color4" href="#">Category</a>
                                 <div class="megapanel">
                                     <div class="row">
                                         <div class="col1">
@@ -120,37 +130,24 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a class="color5" href="#">Sách tiếng việt</a>
-                                <div class="megapanel">
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Contact</h4>
-                                            <ul>
-                                                <li><a href="mens.html">lập trình</a></li>
-                                                <li><a href="mens.html">Ngoại ngữ</a></li>
-                                                <li><a href="mens.html">Toán học, vật lý</a></li>
-                                                <li><a href="mens.html">Khác</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </li>
-                            <li><a class="color6" href="other.jsp">Other</a></li>
-                            <li><a class="color7" href="other.jsp">Purchase</a></li>
+                            
+                            <li><a class="color6" href="#">Other</a></li>
+                            <li><a class="color7" href="checkout.jsp">Purchase</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="header-bottom-right">
                     <div class="search">
-                        <input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {
-                                    this.value = 'Search';
+                        <form action="SearchBookServlet" method="post">
+                        <input type="text" name="search" class="textbox" value="Search book..." onfocus="this.value = '';" onblur="if (this.value == '') {
+                                    this.value = 'Search book...';
                                 }">
-                        <input type="submit" value="Subscribe" id="submit" name="submit">
+                        <input type="submit" value="searchbook" id="searchbook" name="searchbook">
                         <div id="response"> </div>
+                        </form>
                     </div>
                     <div class="tag-list">
-                        <ul class="icon1 sub-icon1 profile_img">
+                            <!--<ul class="icon1 sub-icon1 profile_img">
                             <li><a class="active-icon c1" href="#"> </a>
                                 <ul class="sub-icon1 list">
                                     <li>
@@ -161,46 +158,13 @@
                                     </li>
                                 </ul>
                             </li>
-                        </ul
+                        </ul>-->
                         
                         <!--Phan gio hang-->
                         <ul class="icon1 sub-icon1 profile_img">
-                            <li><a class="active-icon c2" href="#"> </a>
-                                <ul class="sub-icon1 list">
-
-                                    <!--Hien thi gio hang phan header-->
-                                    <div class="shopping_cart">
-                                        
-                                        <% for (Map.Entry<String, Item> list : cart.getCartItem().entrySet()) {%>
-                                        <div class="cart_box">
-                                            <div class="message">
-                                                <div class="alert-close"> </div> 
-                                                <div class="list_img"><img src="<%=list.getValue().getBook().getBookImage()%>" class="img-responsive" alt=""></div>
-                                                <div class="list_desc"><h4><a href="CartServlet?command=remove&bookID=<%=list.getValue().getBook().getBookCode()%>"><%=list.getValue().getBook().getBookName()%></a></h4>
-                                                    <%=list.getValue().getQuantity()%> x<span class="actual">$<%=list.getValue().getBook().getBookPrice()%></span>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </div>
-                                        <%}%>
-                                        
-                                    </div>
-                                    <div class="total">
-                                        <div class="total_left">CartSubtotal : </div>
-                                        <div class="total_right">$<%=cart.totalCart()%></div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div>
-                                        <div class="check_button"><a href="checkout.jsp">Check out</a></div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <!--Hien thi gio hang phan header-->
-
-
-                                </ul>
-                            </li>
+                            <li><a class="active-icon c2" href="viewcart.jsp"></a></li>
                         </ul>
+                              
                         <ul class="last">
                             <li><a href="#">Cart(<%=cart.countItem()%>)</a></li>
                         </ul>

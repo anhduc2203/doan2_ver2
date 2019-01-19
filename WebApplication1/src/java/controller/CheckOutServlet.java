@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,9 @@ public class CheckOutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+     
         
         String payment = request.getParameter("payment");
         String address = request.getParameter("address");
@@ -51,38 +55,44 @@ public class CheckOutServlet extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
         Account account = (Account) session.getAttribute("acc");
         
-        try {
-            Long ID = new Date(System.currentTimeMillis()).getTime();
-            String s = Long.toString(ID);
-            String billCode = s.trim();
+        if(address.equals("")){
+            session.setAttribute("errorcheckout", "null");
+            response.sendRedirect("/WebApplication1/checkout.jsp");
+        } else {
+            try {
+                Long ID = new Date(System.currentTimeMillis()).getTime();
+                String s = Long.toString(ID);
+                String billCode = s.trim();
+
+                Bill bill = new Bill();
+                bill.setBillID(billCode);
+                bill.setAddress(address);
+                bill.setPayment(payment);
+                bill.setTotal(cart.totalCart());
+                bill.setAccountID(account.getUserCode());
+                bill.setDate(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+                billDAO.insertBill(bill);
+
+                String msg = "Order Code: " + billCode + "\nPayment: " + payment + "\nTotal: " + cart.totalCart() + "\nDate: " + bill.getDate() + "\nOrder:";
+                BookDAO bookDAO = new BookDAO();
+                for (Map.Entry<String, Item> list: cart.getCartItem().entrySet()){
+                    msg = msg + "\n\t+ " + bookDAO.getBookByBookID(list.getValue().getBook().getBookCode()).getBookName() + " x " + list.getValue().getQuantity();
+                    billDetailDAO.insertBillDetail(new BillDetail("", billCode,
+                            list.getValue().getBook().getBookCode(),
+                            list.getValue().getBook().getBookPrice(),
+                            list.getValue().getQuantity()));
+                }  
+
+                new SendEmail().sendMail(account.getUserEmail(), "LEO SHOP - Project 2", msg);
+
+                cart = new Cart();
+                session.setAttribute("cart", cart);
+                response.sendRedirect("/WebApplication1/thongbao.jsp");
+
+            } catch (ClassNotFoundException | SQLException e) {
+            }
             
-            Bill bill = new Bill();
-            bill.setBillID(billCode);
-            bill.setAddress(address);
-            bill.setPayment(payment);
-            bill.setTotal(cart.totalCart());
-            bill.setAccountID(account.getUserCode());
-            bill.setDate(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-            billDAO.insertBill(bill);
-            
-            String msg = "Order Code: " + billCode + "\nPayment: " + payment + "\nTotal: " + cart.totalCart() + "\nOrder:";
-            BookDAO bookDAO = new BookDAO();
-            for (Map.Entry<String, Item> list: cart.getCartItem().entrySet()){
-                msg = msg + "\n\t+ " + bookDAO.getBookByBookID(list.getValue().getBook().getBookCode()).getBookName() + " x " + list.getValue().getQuantity();
-                billDetailDAO.insertBillDetail(new BillDetail("", billCode,
-                        list.getValue().getBook().getBookCode(),
-                        list.getValue().getBook().getBookPrice(),
-                        list.getValue().getQuantity()));
-            }  
-            
-            new SendEmail().sendMail(account.getUserEmail(), "LEO SHOP - Project 2", msg);
-            
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-                    
-        } catch (ClassNotFoundException | SQLException e) {
         }
-        response.sendRedirect("/WebApplication1/thongbao.jsp");
     }
 
     

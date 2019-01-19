@@ -56,9 +56,9 @@
                         <%
                             String s = authorDAO.getAuthorByID(Integer.parseInt(authorID));
                         %>
-                        <h2 class="head"><%=s %></h2>
+                        <h2 class="head">Author: <%=s%></h2>
                         <div class="mens-toolbar">
-                            <div class="sort">
+<!--                            <div class="sort">
                                 <div class="sort-by">
                                     <label>Sort By</label>
                                     <select>
@@ -90,7 +90,7 @@
                                     <li><a href="#">2</a></li>
                                 </ul>
                                 <div class="clear"></div>
-                            </div>
+                            </div>-->
                             <div class="clear"></div>
                         </div>
                         
@@ -114,23 +114,27 @@
                             %>
                             
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
                                         </div>
+                                        </a>
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName() %></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice() %></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">     
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                             <%
                                 }
@@ -142,7 +146,7 @@
                             }
                             }else{
                                 sohang = size/3 + 1;
-                                sodu = size/3;
+                                sodu = size%3;
                                     
                                 int k;
                                 for(k = 0; k < (sohang - 1); k++){
@@ -157,23 +161,27 @@
                             %>
                             
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
                                         </div>
+                                        </a>
                                         <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                             <div class="cart-left">
                                                 <p class="title"><%=b.getBookName() %></p>
                                                 <div class="price1">
                                                     <span class="actual">$<%=b.getBookPrice() %></span>
                                                 </div>
                                             </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">     
                                             <div class="cart-right"> </div>
+                                            </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                             <%
                                 }
@@ -184,8 +192,44 @@
                         
                         <%
                                 }
-                            }
                         %>
+                        <div class="top-box">
+                            <%
+                                //bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(index);
+                                for(int j = k*3; j < (k*3+sodu); j++){
+                                    Book b = bookDAO.getListBookByAuthor(Integer.parseInt(authorID)).get(j);
+                                    if(b == null) break;
+                            %>
+                            
+                            <div class="col_1_of_3 span_1_of_3">
+                                    <div class="inner_content clearfix">
+                                        <a href="single.jsp?bookID=<%=b.getBookCode() %>">
+                                        <div class="product_image">
+                                            <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
+                                        </div>
+                                        </a>
+                                        <div class="price">
+                                            <a href="single.jsp?bookID=<%=b.getBookCode() %>">
+                                            <div class="cart-left">
+                                                <p class="title"><%=b.getBookName() %></p>
+                                                <div class="price1">
+                                                    <span class="actual">$<%=b.getBookPrice() %></span>
+                                                </div>
+                                            </div>
+                                            </a>
+                                            <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>">     
+                                            <div class="cart-right"> </div>
+                                            </a>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <%
+                                }
+                            %>                           
+                            <div class="clear"></div>
+                        </div>
+                        <% } %>
                         
                     </div>
                         
@@ -220,7 +264,7 @@
                                         <%
                                             for(Author author : authorDAO.getAuthor()){
                                         %>
-                                        <li><a href="engbook.jsp?author=<%=author.getAuthorID() %>"><%=author.getAuthorName() %></a></li>
+                                        <li><a href="engbookbyauthor.jsp?author=<%=author.getAuthorID() %>"><%=author.getAuthorName() %></a></li>
                                         <%
                                             }
                                         %>

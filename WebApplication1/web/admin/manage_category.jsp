@@ -32,12 +32,20 @@
         
         <div id="wrapper">
 
-            <jsp:include page="menu.jsp"></jsp:include>
+            <jsp:include page="menu1.jsp"></jsp:include>
             <div id="rightContent">
                 <h3>Quản lí danh mục sách</h3>
                 <br>
                 <a href="${root}/admin/insert_category.jsp">Thêm danh mục sách</a>
                 <br><br>
+                <%if (session.getAttribute("errdelcategory") != null) {%>
+                <div>
+                    <p style="color: red">*Không thể xóa danh mục này!</p>
+                </div>
+                <%
+                    }
+                    session.removeAttribute("errdelcategory");
+                %>
                 <table class="data">
                     <tr class="data">
                         <th class="data" width="30px">STT</th>
@@ -58,7 +66,7 @@
                         <td class="data"><%=category.getCategoryName()%></td>
                         <td class="data" width="90px">
                             <center>
-                                <a href="${root}/admin/update_category.jsp?command=update&categoryID=<%=category.getCategoryID()%>">Sửa</a>&nbsp;&nbsp; |&nbsp;&nbsp;
+                                <a href="${root}/admin/update_category.jsp?categoryID=<%=category.getCategoryID()%>">Sửa</a>&nbsp;&nbsp; |&nbsp;&nbsp;
                                 <a href="/WebApplication1/ManagerCategoryServlet?command=delete&categoryID=<%=category.getCategoryID()%>">Xóa</a>
                             </center>
                         </td>

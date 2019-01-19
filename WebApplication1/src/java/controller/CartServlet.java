@@ -35,6 +35,9 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        
         HttpSession session = request.getSession();
         String command = request.getParameter("command");
         String bookID = request.getParameter("bookID");

@@ -9,9 +9,13 @@ import connect.ConnectDB;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Bill;
 
 /**
@@ -29,16 +33,44 @@ public class BillDAO {
         ps.setString(2, bill.getAccountID());
         ps.setDouble(3, bill.getTotal());
         ps.setString(4, bill.getPayment());
-        ps.setString(5, bill.getAddress());
+        ps.setNString(5, bill.getAddress());
         ps.setTimestamp(6, bill.getDate());
         ps.executeUpdate();
     }
     
-//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//
-//        Long ID = new Date(System.currentTimeMillis()).getTime();
-//        String s = Long.toString(ID);
-//        String trim = s.trim();
-//        new BillDAO().insertBill(new Bill(trim, "USER000001", 10, "live", "Ha Noi", new Timestamp(new Date(System.currentTimeMillis()).getTime())));
-//    }
+    
+    // Admin huy don hang
+    public void cancelBill(Bill bill) throws ClassNotFoundException{
+        Connection conn = ConnectDB.getConnectionDB();
+        
+        
+    }
+    
+    // Lay danh sach hoa don
+    public ArrayList<Bill> getListBill() throws ClassNotFoundException{
+        Connection conn = ConnectDB.getConnectionDB();
+        String sql = "SELECT * FROM BILL";
+        
+        ArrayList<Bill> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Bill bill = new Bill();
+                bill.setBillID(rs.getString("BillCode"));
+                bill.setAccountID(rs.getString("UserCode"));
+                bill.setTotal(rs.getFloat("Total"));
+                bill.setPayment(rs.getString("Payment"));
+                bill.setAddress(rs.getString("Address"));
+                bill.setDate(rs.getTimestamp("Date"));
+                list.add(bill);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    
 }

@@ -20,8 +20,8 @@
         
         <%
             String error = "";
-            if (request.getParameter("error") != null){
-                error = (String) request.getParameter("error");
+            if (session.getAttribute("error") != null){
+                error = (String) session.getAttribute("error");
             }
         
         %>
@@ -30,7 +30,7 @@
         
         <div id="wrapper">
 
-            <jsp:include page="menu.jsp"></jsp:include>
+            <jsp:include page="menu1.jsp"></jsp:include>
             
             <div id="rightContent">
                 <h3>Thông tin danh mục sách</h3>
@@ -42,7 +42,7 @@
                     </tr>
                     <tr><td></td><td>
                             <input type="hidden" name="command" value="insert">
-                            <input type="submit" class="button" value="Lưu">
+                            <input type="submit" class="button" value="Lưu dữ liệu">
                         </td></tr>
                 </table>
                 </form>

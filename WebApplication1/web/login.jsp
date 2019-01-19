@@ -57,11 +57,11 @@
                                         <input id="modlgn_passwd" type="password" name="password" class="inputbox" size="18" autocomplete="off">
                                     </p>
                                     <div class="remember">
-                                        <p id="login-form-remember">
-                                            <label for="modlgn_remember"><a href="#">Forget Your Password ?</a></label>
-                                        </p>
-                                        
                                         <button class="grey" type="hidden" value="login" name="command">Login</button>
+                                        <p id="login-form-remember">
+                                            <label for="modlgn_remember"><a href="forgetpassword.jsp">Forget Your Password ?</a></label>
+                                        </p> 
+                                        
                                         
                                         <div class="clear"></div>
                                     </div>

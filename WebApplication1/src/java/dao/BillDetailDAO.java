@@ -8,7 +8,9 @@ package dao;
 import connect.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.BillDetail;
 
 /**
@@ -32,8 +34,61 @@ public class BillDetailDAO {
         ps.executeUpdate();
     }
     
+    // Lay danh sach hoa don
+    public ArrayList<BillDetail> getListBillDetailByBillID(String billID) throws ClassNotFoundException{
+        Connection conn = ConnectDB.getConnectionDB();
+        String sql = "SELECT * FROM BILL_DETAIL WHERE BillCode='"+billID+"'";
+        
+        ArrayList<BillDetail> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BillDetail billdetail = new BillDetail();
+                billdetail.setBillDetailID(rs.getString("BillDetailCode"));
+                billdetail.setBookID(rs.getString("BookCode"));
+                billdetail.setPrice(rs.getFloat("Price"));
+                billdetail.setQuantity(rs.getInt("Quantity"));
+                billdetail.setBillID(rs.getString("BillCode"));
+                list.add(billdetail);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     
-//    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        new BillDetailDAO().insertBillDetail(new BillDetail("", "BILL000001", "BOOK000001", 10, 1));
+    
+    // Lay danh sach hoa don theo the loai sach:
+    public ArrayList<BillDetail> getListBillDetailByBookCategory(int categoryID) throws ClassNotFoundException{
+        Connection conn = ConnectDB.getConnectionDB();
+        String sql = "SELECT BD.* FROM dbo.BILL_DETAIL AS BD, dbo.BOOK AS B WHERE BD.BookCode = B.BookCode AND B.BookCategoryID = '"+categoryID+"'";
+        
+        ArrayList<BillDetail> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BillDetail billdetail = new BillDetail();
+                billdetail.setBillDetailID(rs.getString("BillDetailCode"));
+                billdetail.setBookID(rs.getString("BookCode"));
+                billdetail.setPrice(rs.getFloat("Price"));
+                billdetail.setQuantity(rs.getInt("Quantity"));
+                billdetail.setBillID(rs.getString("BillCode"));
+                list.add(billdetail);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+     
+//    public static void main(String[] args) throws ClassNotFoundException {
+//        for(BillDetail b : new BillDetailDAO().getListBillDetailByBookCategory(2)){
+//            System.out.println(b.getBillDetailID());
+//        }
 //    }
 }

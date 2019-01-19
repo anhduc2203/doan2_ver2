@@ -20,8 +20,8 @@
         
         <%
             String error = "";
-            if (request.getParameter("error") != null){
-                error = (String) request.getParameter("error");
+            if (session.getAttribute("error") != null){
+                error = (String) session.getAttribute("error");
             }
         
         %>
@@ -30,7 +30,7 @@
         
         <div id="wrapper">
 
-            <jsp:include page="menu.jsp"></jsp:include>
+            <jsp:include page="menu1.jsp"></jsp:include>
             
             <div id="rightContent">
                 <h3>Cập nhật danh mục sách</h3>

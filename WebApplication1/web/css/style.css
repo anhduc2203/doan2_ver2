@@ -424,6 +424,8 @@ h2.head{
 	position: relative;
 }
 .product_image {
+    width: 180px;
+    height: 270px;
 	
 }
 .product_image img{
@@ -469,6 +471,8 @@ h2.head{
 	margin-right: 2.6%;
 }
 p.title{
+        width: 201px;
+        height: 50px;
 	color: #777;
 	font-size:1.3em;
 }
@@ -1030,6 +1034,20 @@ table {
 	width: 100%;
 }
 .register_account form input[type="text"], .register_account form select {
+	font-size:0.95em;
+	color:#777;
+	padding: 8px;
+	outline: none;
+	margin:10px 0;
+	width:91%;
+	font-family: 'Exo 2', sans-serif;
+	border:none;
+	box-shadow:0 0 2px #aaa;
+	-webkit-box-shadow:0 0 2px #aaa;
+	-moz-box-shadow:0 0 2px #aaa;
+	-o-box-shadow:0 0 2px #aaa;
+}
+.register_account form input[type="password"], .register_account form select {
 	font-size:0.95em;
 	color:#777;
 	padding: 8px;
@@ -1656,7 +1674,8 @@ span.color7{
 	margin:0;
 }
 .images_3_of_2 {
-	width: 41.2%;
+	width: 180px;
+        height: 270px;
 	float: left;
 	margin-right: 2.6%;
 }
@@ -3305,6 +3324,7 @@ a.cart-to{
 	width:20%;
 	border:1px solid #e0e0e0;
 	margin-right:6%;
+        
 }
 .list_desc{
 	float:left;
@@ -3326,4 +3346,19 @@ span.actual{
 }
 .list_desc h4 a:hover{
 	color: #f54d56;
+}
+
+
+.btncheckout{
+	text-decoration: none;
+        background-color: #222222;
+	color: #fff;
+	padding: 10px 60px;
+	border: none;
+	transition: 1.5s ease;
+}
+
+.btncheckout:hover{
+	background-color: #CB3D27;
+	color: #fff;
 }

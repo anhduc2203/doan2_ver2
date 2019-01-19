@@ -30,6 +30,9 @@ public class CheckAccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        
         System.out.println("\nOutput: "+request.getParameter("username")+"\n");
         try {
             if (accountDAO.checkAccount(request.getParameter("username"))) {

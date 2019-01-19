@@ -7,12 +7,12 @@ package controller;
 
 import dao.CategoryDAO;
 import java.io.IOException;
-import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Category;
 
 /**
@@ -26,6 +26,7 @@ public class ManagerCategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
@@ -36,7 +37,10 @@ public class ManagerCategoryServlet extends HttpServlet {
         try {
             switch(cmd){
                 case "delete":
-                    categoryDAO.deleteCategory(Long.parseLong(categoryID));
+                    boolean flag = categoryDAO.deleteCategory(Integer.parseInt(categoryID));
+                    if(flag == false){
+                        session.setAttribute("errdelcategory", "errr");
+                    }
                     url = "/admin/manage_category.jsp";
                     break;
             }
@@ -52,6 +56,8 @@ public class ManagerCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
+        
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String cmd = request.getParameter("command");
@@ -61,14 +67,14 @@ public class ManagerCategoryServlet extends HttpServlet {
         
         if (tenDanhMuc.equals("")) {
             error = "Vui lòng nhập vào tên danh mục!";
-            request.setAttribute("error", error);
+            session.setAttribute("error", error);
         }
         
         try {
             if (error.length()==0) {
                 switch(cmd){
                     case "insert":
-                        categoryDAO.insertCategory(new Category((int) new Date(0).getTime(), tenDanhMuc));
+                        categoryDAO.insertCategory(new Category(2, tenDanhMuc));
                         url = "/admin/manage_category.jsp";
                         break;
                     case "update":

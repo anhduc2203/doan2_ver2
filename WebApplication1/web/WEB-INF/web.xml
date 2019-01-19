@@ -25,8 +25,40 @@
         <servlet-class>controller.ManagerCategoryServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ManagerAuthorServlet</servlet-name>
+        <servlet-class>controller.ManagerAuthorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerBookServlet</servlet-name>
+        <servlet-class>controller.ManagerBookServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewsLettersServlet</servlet-name>
+        <servlet-class>controller.NewsLettersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCartServlet</servlet-name>
+        <servlet-class>controller.ViewCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChartServlet</servlet-name>
+        <servlet-class>controller.ChartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>controller.UploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBookServlet</servlet-name>
+        <servlet-class>controller.SearchBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageKhachHangServlet</servlet-name>
+        <servlet-class>controller.ManageKhachHangServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountServlet</servlet-name>
@@ -53,8 +85,40 @@
         <url-pattern>/ManagerCategoryServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ManagerAuthorServlet</servlet-name>
+        <url-pattern>/ManagerAuthorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerBookServlet</servlet-name>
+        <url-pattern>/ManagerBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewsLettersServlet</servlet-name>
+        <url-pattern>/NewsLettersServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCartServlet</servlet-name>
+        <url-pattern>/ViewCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChartServlet</servlet-name>
+        <url-pattern>/ChartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/UploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBookServlet</servlet-name>
+        <url-pattern>/SearchBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageKhachHangServlet</servlet-name>
+        <url-pattern>/ManageKhachHangServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

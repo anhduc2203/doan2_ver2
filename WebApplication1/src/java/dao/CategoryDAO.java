@@ -66,11 +66,11 @@ public class CategoryDAO {
     public boolean insertCategory(Category c) throws ClassNotFoundException{
         
         Connection conn = ConnectDB.getConnectionDB();
-        String sql = "insert into CATEGORY values(?, ?)";
+        String sql = "insert into CATEGORY values(?)";
         try {
             PreparedStatement ps = conn.prepareCall(sql);
-            ps.setLong(1, c.getCategoryID());
-            ps.setString(2, c.getCategoryName());
+            //ps.setLong(1, c.getCategoryID());
+            ps.setString(1, c.getCategoryName());
             return ps.executeUpdate() == 1;
             
         } catch (SQLException e) {
@@ -102,7 +102,7 @@ public class CategoryDAO {
     }
     
     //Xóa thể loại khỏi dữ liệu
-    public boolean deleteCategory(long categoryID) throws ClassNotFoundException{
+    public boolean deleteCategory(int categoryID) throws ClassNotFoundException{
         
         Connection conn = ConnectDB.getConnectionDB();
         String sql = "delete from CATEGORY where CategoryID = ?";
@@ -117,12 +117,12 @@ public class CategoryDAO {
         
     }
     
-    public static void main(String[] args) throws ClassNotFoundException {
-        CategoryDAO dao = new CategoryDAO();
-//        for (int i=3;i<10;i++){
-//            dao.insertCategory(new Category(i, "Category"+i));
-//        }
-        System.out.println(dao.deleteCategory(3));
-    }
+//    public static void main(String[] args) throws ClassNotFoundException {
+//        CategoryDAO dao = new CategoryDAO();
+////        for (int i=3;i<10;i++){
+////            dao.insertCategory(new Category(i, "Category"+i));
+////        }
+//        System.out.println(dao.deleteCategory(3));
+//    }
     
 }

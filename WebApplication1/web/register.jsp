@@ -53,8 +53,13 @@
                 <h4 class="title">Create an Account</h4>
                 <form action="AccountServlet" method="POST">
                     <div class="col_1_of_2 span_1_of_2">
+                        <%if (session.getAttribute("errorusername") != null) {%>
+                        <div>
+                            <p style="color: red">*Tài khoản đã tồn tại!</p>
+                        </div>
+                        <%}%>
                         <div><input type="text" name="username" id="username" value="User Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}"><span id="user-result"></span></div>
-                        <div><input type="text" name="password" id="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"></div>
+                        <div><input type="password" name="password" id="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"></div>
                         <div><input type="text" name="name" id="name" value="Full Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
                         <div><input type="text" name="ctyorschool" id="ctyorschool" value="Company or School" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Company or School';}"></div>
 
@@ -75,11 +80,13 @@
                         <div><input type="text" name="address" id="address" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>
                         <div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
                                 <option value="null">Select a Country</option>                           
-                                <option value="Viet Nam">Viet Nam</option>
+                                <option value="Vietnam">Vietnam</option>
                                 <option value="Korea">Korea</option>
                                 <option value="USA">USA</option>
+                                <option value="Japan">Japan</option>
                             </select>
                         </div> 
+                        <br> <br>
                         <button class="grey" type="hidden" value="register" name="command">Create Account</button>
                         <!--button class="grey">Create Account</button-->
 

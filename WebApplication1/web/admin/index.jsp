@@ -18,7 +18,7 @@
         
     </head>
     <body>
-        
+<!--        Trang chủ chưa đăng nhập-->
         <jsp:include page="header.jsp"></jsp:include>
         
         <div id="wrapper">

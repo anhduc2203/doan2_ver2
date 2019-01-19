@@ -71,7 +71,9 @@
                                     <div class="like_box">
                                         <div class="fb-like-box" data-href="http://www.facebook.com"
                                              data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false"
-                                             data-show-border="true"></div>
+                                             data-show-border="true">
+                                         
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col_1_of_f_2 span_1_of_f_2">
@@ -81,7 +83,7 @@
                                             <span> </span>
                                         </div>
                                         <div class="recent-tweet-info">
-                                            <p>Contact us  <a href="#">https://twitter.com/?lang=vi</a></p>
+                                            <p>Contact us  <a href="https://twitter.com/?lang=vi">https://twitter.com/?lang=vi</a></p>
                                         </div>
                                         <div class="clear"> </div>
                                     </div>
@@ -90,7 +92,7 @@
                                             <span> </span>
                                         </div>
                                         <div class="recent-tweet-info">
-                                            <p>Contact us  <a href="#">https://twitter.com/?lang=vi</a></p>
+                                            <p>Contact us  <a href="https://twitter.com/?lang=vi">https://twitter.com/?lang=vi</a></p>
                                         </div>
                                         <div class="clear"> </div>
                                     </div>
@@ -160,5 +162,22 @@
                 </div>
             </div>
         </div>
+        
+        <!--Plugin Live Chat Subiz-->
+        <!-- Subiz -->
+        <script>
+          (function(s, u, b, i, z){
+            u[i]=u[i]||function(){
+              u[i].t=+new Date();
+              (u[i].q=u[i].q||[]).push(arguments);
+            };
+            z=s.createElement('script');
+            var zz=s.getElementsByTagName('script')[0];
+            z.async=1; z.src=b; z.id='subiz-script';
+            zz.parentNode.insertBefore(z,zz);
+          })(document, window, 'https://widgetv4.subiz.com/static/js/app.js', 'subiz');
+          subiz('setAccount', 'acqfncptgmcpptldasbd');
+        </script>
+        <!-- End Subiz -->
     </body>
 </html>
